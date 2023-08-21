@@ -44,10 +44,9 @@ function game() {
             console.log(`Round ${round}: It's a draw!`);
         }
     }
-}
 
 
-console.log("Final Scores:");
+    console.log("Final Scores:");
 console.log(`You: ${playerScore} wins`);
 console.log(`Computer: ${computerScore} wins`);
 
@@ -59,6 +58,10 @@ if (playerScore > computerScore) {
 } else {
     console.log("It's a tie!");
 }
+
+}
+
+
 
 
 //Calling game function:
