@@ -5,3 +5,21 @@ function getComputerChoice() {
     return choices[randomIndex];
 }
 
+function playRound(playerSelection, computerSelection) {
+    const playerChoice = playerSelection.toLowerCase();
+    const computerChoice = computerSelection.toLowerCase();
+
+    if (
+        (playerChoice === 'rock' && computerChoice === 'scissor') ||
+        (playerChoice === 'scissor' && computerChoice === 'paper') ||
+        (playerChoice === 'paper' && computerChoice === 'rock')
+    ) {
+        return 'win';
+    } else if (playerChoice === computerChoice) {
+        return 'draw';
+    } else {
+        return 'lose';
+    }
+}
+
+
