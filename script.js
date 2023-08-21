@@ -22,4 +22,31 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+// game function that will call playRound function function to play 5 round of game
+
+function game() {
+    let playerScore = 0;
+    let computerScore = 0;
+
+    for (let round = 1; round <= 5; round++) {
+        const playerSelection = prompt(`Round ${round}: Enter your choice (rock, paper, or scissor):`);
+        const computerSelection = getComputerChoice(); // Calling  getComputerChoice function here
+
+        const result = playRound(playerSelection, computerSelection);
+
+        if (result === 'win') {
+            playerScore++;
+            console.log(`Round ${round}: You win! ${playerSelection} beats ${computerSelection}`);
+        } else if (result === 'lose') {
+            computerScore++;
+            console.log(`Round ${round}: You lose! ${computerSelection} beats ${playerSelection}`);
+        } else {
+            console.log(`Round ${round}: It's a draw!`);
+        }
+    }
+}
+
+
+
+
 
