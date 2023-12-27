@@ -1,4 +1,7 @@
-// Helper function for getting computer's choice
+let playerScore = 0;
+let computerScore = 0;
+let gameOver = false;
+
 function getComputerChoice() {
     const choices = ['rock', 'paper', 'scissor'];
     const randomIndex = Math.floor(Math.random() * choices.length);
@@ -14,57 +17,51 @@ function playRound(playerSelection, computerSelection) {
         (playerChoice === 'scissor' && computerChoice === 'paper') ||
         (playerChoice === 'paper' && computerChoice === 'rock')
     ) {
-        return 'win';
+        playerScore++;
+        return `Round: You win! ${playerChoice} beats ${computerChoice}`;
     } else if (playerChoice === computerChoice) {
-        return 'draw';
+        return "Round: It's a draw!";
     } else {
-        return 'lose';
+        computerScore++;
+        return `Round: You lose! ${computerChoice} beats ${playerChoice}`;
     }
 }
 
-// game function that will call playRound function function to play 5 round of game
+function updateScoreAndCheckWinner() {
+    document.getElementById('score').innerText = `Score - You: ${playerScore} Computer: ${computerScore}`;
 
-function game() {
-    let playerScore = 0;
-    let computerScore = 0;
-
-    for (let round = 1; round <= 5; round++) {
-        const playerSelection = prompt(`Round ${round}: Enter your choice (rock, paper, or scissor):`);
-        const computerSelection = getComputerChoice(); // Calling  getComputerChoice function here
-
-        const result = playRound(playerSelection, computerSelection);
-
-        if (result === 'win') {
-            playerScore++;
-            console.log(`Round ${round}: You win! ${playerSelection} beats ${computerSelection}`);
-        } else if (result === 'lose') {
-            computerScore++;
-            console.log(`Round ${round}: You lose! ${computerSelection} beats ${playerSelection}`);
+    if (playerScore === 5 || computerScore === 5) {
+        gameOver = true;
+        if (playerScore > computerScore) {
+            document.getElementById('result').innerText = "Congratulations, you are the winner!";
+        } else if (playerScore < computerScore) {
+            document.getElementById('result').innerText = "Computer is the winner. Better luck next time!";
         } else {
-            console.log(`Round ${round}: It's a draw!`);
+            document.getElementById('result').innerText = "It's a tie!";
         }
     }
-
-
-    console.log("Final Scores:");
-console.log(`You: ${playerScore} wins`);
-console.log(`Computer: ${computerScore} wins`);
-
-
-if (playerScore > computerScore) {
-    console.log("Congratulations, you are the winner!");
-} else if (playerScore < computerScore) {
-    console.log("Computer is the winner. Better luck next time!");
-} else {
-    console.log("It's a tie!");
 }
 
-}
+document.getElementById('rockBtn').addEventListener('click', () => {
+    if (!gameOver) {
+        const result = playRound('rock', getComputerChoice());
+        document.getElementById('result').innerText = result;
+        updateScoreAndCheckWinner();
+    }
+});
 
+document.getElementById('paperBtn').addEventListener('click', () => {
+    if (!gameOver) {
+        const result = playRound('paper', getComputerChoice());
+        document.getElementById('result').innerText = result;
+        updateScoreAndCheckWinner();
+    }
+});
 
-
-
-//Calling game function:
-game();
-
-
+document.getElementById('scissorBtn').addEventListener('click', () => {
+    if (!gameOver) {
+        const result = playRound('scissor', getComputerChoice());
+        document.getElementById('result').innerText = result;
+        updateScoreAndCheckWinner();
+    }
+});
